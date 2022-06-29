@@ -62,4 +62,29 @@
     font-weight: bold;
   }
   
-  
+  /* #bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+      
+    /* Preserve aspet ratio */
+    /* min-width: 100%;
+    /* min-height: 90%; */
+
+    #bg {
+        height: 100vh;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-justify-content: space-between;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        background: url("https://th.bing.com/th/id/R.67b6cdafb3a0620db869a448571947f6?rik=9kEGStrn4bzb1g&riu=http%3a%2f%2fwww.freeimageslive.co.uk%2ffiles%2fimages010%2fmountain_summit.jpg&ehk=hGTDC8NhP1jarMoP6E8H4%2b6tsLlul4cDVx64tRRlpKQ%3d&risl=1&pid=ImgRaw&r=0") center center no-repeat;
+        background-size: cover;
+      }
