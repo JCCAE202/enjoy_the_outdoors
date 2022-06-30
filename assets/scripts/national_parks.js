@@ -8,34 +8,15 @@ let searchTypeDDL = document.querySelector("#searchTypeDDL");
 let locationsDDL = document.querySelector("#locations");
 let typesDDL = document.querySelector("#types");
 let stateSearchList = document.querySelector("#stateSearchList");
-
+let typeSearchAttributeList = document.querySelector("#typeSearchAttributeList");
+// Make the table work
+let locationTable = document.querySelector("#locationTable");
+let locationTableBody = document.querySelector("#locationTableBody");
 
 // theSampleButton.addEventListener("click", function(event){
 //     console.log(locationsArray)
 //     console.log(nationalParksArray)
 //     console.log(parkTypesArray)
-
-
-//     locationsArray.forEach((location) => {
-//         theSampleUL.innerHTML += `<li>${location}</li>`
-//     })
-
-//     parkTypesArray.forEach((parkType) => {
-//         parkTypeUL.innerHTML += `<li>${parkType}</li>`
-//     })
-
-//     nationalParksArray.forEach((park) => {
-//         parksUl.innerHTML += `<li>${park.LocationName}</li>`
-//     })
-
-//     theSampleUL.classList.remove("d-none")
-
-//     parkTypeUL.classList.remove("d-none")
-
-//     parksUL.classList.remove("d-none")
-
-// })
-
 
 
 
@@ -47,18 +28,21 @@ searchTypeDDL.addEventListener("change", function (event) {
     // if search type is location then show locations dropdown
 
     //hide all the dropdowns and then check which is supposed to show below
-    //     locationsDDL.classList.add("d-none")
-    //     typesDDL.classList.add("d-none")
+   
     stateSearchList.classList.add("d-none")
-
-
 
     if (event.target.value === "location") {
         generateLocationsDDLOptions();
         stateSearchList.classList.remove("d-none")
-
-
     }
+
+    typeSearchAttributeList.classList.add("d-none")
+
+    if(event.target.value === "types") {
+    generateLocationsDDLOptions();
+    typeSearchAttributeList.classList.remove("d-none")
+    }
+
 
     // if(event.target.value === "type"){
     //     generateTypesDDLOptions()
@@ -79,7 +63,17 @@ stateSearchList.addEventListener("change", function (event) {
     console.log(filteredParksArray)
 })
 
+typeSearchAttributeList.addEventListener("change", function (event) {
+    alert("dropdown changed to:" + event.target.value)
+    let filteredParksArray = nationalParksArray.filter(function (park) {
+        if (park.Type === event.target.value) {
+            return true
+        }
+        return false
 
+    })
+    console.log(filteredParksArray)
+})
 
 
 // locationsDDL.addEventListener("change", function(event){
@@ -98,9 +92,50 @@ function generateLocationsDDLOptions() {
 
 function generateTypesDDLOptions() {
 
-    parkTypesArray.forEach((partkType) => {
-        typesDDL.innerHTML += `<option value="${partkType}">${partkType}</option>`
+    parkTypesArray.forEach((parkType) => {
+        typeSearchAttributeList.innerHTML += `<option value="${parkType}">${parkType}</option>`
     })
 
 }
+
+function generateLocationTableData(filteredParksArray) {
+
+filteredParksArray.forEach((parkType) => {
+    locationTableBody.innerHTML +=  <tr>
+        <td>${nationalParksArray.LocationName}</td>
+        <td>${nationalParksArray.address}</td>
+        <td>${nationalParksArray.City}</td>
+
+    </tr>
+}
+)
+
+}
+
+
+function generateCards(someArray){
+// empty previous results
+priorCardsDiv.innerHTML = ""
+
+// generate new table rows and append to the tbody innerHTML
+someArray.forEach((park))=>{
+    let card = '<div class="col">'
+    card +='<div class="card">'
+    card +='   <img src="..." class="card-img-top"  alt="...">'
+    card +='   <div class="card-body">'
+    card +='    <h5 class="card-title"> Card Title</h5>'
+    card +='    <p class="card-text"> This is a longer card...>'
+    card +='    <div class="card-body">'
+    card +='    <h5 class="card-title> Card Title</h5'
+    card +='    <p class="card-text"> This is a longer card...>'
+    card +='    </div>'
+    card +='   </div>'
+    card +='    </div>'
+
+    resultCardsDiv.innerHTML += card
+}
+
+
+}
+
 

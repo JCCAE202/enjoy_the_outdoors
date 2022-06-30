@@ -16,13 +16,13 @@
   <title>National Parks Search Page</title>
 </head>
 
-  <!-- HEADER -- NAV BAR -->
+
   <!-- HEADER -- NAV BAR -->
 
 <body class="bg-dark text-white">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html"> Happy Hunting</a>
+      <a class="navbar-brand" href="index.html"> Happy Hiking</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -72,32 +72,36 @@
 
 
 
-  <!-- <div class="middle-content-section">
-    <h1>This is the National Park Page!</h1>
-    <button class="button large">Button</button>
-    <button class="button large">Button</button>
-  </div> -->
 
 
 
 
 
-  <h1>Welcome to the National Parks Search Page!</h1>
 
-  <!-- <button id="theDemoButton">The Sample Button</button> -->
+  <h1>Welcome to the Mountains Info Page!</h1>
 
-  <!-- <ul id="locations" class="d-none">
-      <li>This is eric's sample list item</li>
-  </ul> -->
-  <select id="searchTypeDDL" class="form-select">
-      <option value="">Choose a Search Type</option>
-      <option value="location">Search By Location</option>
-      <option value="type">Search By Type</option>
-  </select>
 
- <select id="stateSearchList" class="d-none">
+  <!-- <select id="mountainSearchList" class="form-select">
+      <option value="">Choose Your Mountain</option>
+       </select> -->
 
- </select>
+  <p>
+    <input type="button" 
+        onclick="populateSelect()" 
+            value="Click to see Marvelous Mountains"/>
+</p>
+
+<!-- On click, display "select drop down" otherwise, hide-->
+
+<select id="chooseMoutain" onchange="show(this)">
+  <option value="">-- Select --</option>
+</select>
+<!-- <p id="message"></p>
+</body> -->
+
+
+<!-- Interact with dropdown to display mountains array -->
+
 
 
 
@@ -110,7 +114,7 @@
     crossorigin="anonymous"></script>
   <!-- Bring in mountains data-->
   <script src="assets/scripts/load_mountains_data.js"></script>
-  <script src="assets/scripts/national_parks.js"></script>
+  <script src="assets/scripts/mountains.js"></script>
 </body>
 
 </html>
