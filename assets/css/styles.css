@@ -1,6 +1,6 @@
 
 .hero-full-screen {
-    height: 100vh;
+    height: 60vh;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -56,6 +56,7 @@
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
+            
   }
   
   .hero-full-screen .top-bar .menu a {
@@ -92,11 +93,15 @@
 
       .card{
         background: #3e818e;
-        padding: 20px;
+        padding: 0px;
         width: 80%;
         max-width: 500px;
         text-align: center;
         font-family: Arial;
       }
 
-   
+    
+      .center {
+       text-align: center
+      }
+      
