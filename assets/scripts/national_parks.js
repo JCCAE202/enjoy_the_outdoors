@@ -9,7 +9,7 @@ let searchTypeDDL = document.querySelector("#searchTypeDDL");
 //get the locations dropdown so we can work with it
 let locationsDDL = document.querySelector("#stateSearchList");
 
-//get the locations dropdown so we can work with it
+//get the types dropdown so we can work with it
 let typesDDL = document.querySelector("#typeSearchAttributeList");
 
 //pulling in the table stuff so i can work with it
@@ -42,7 +42,6 @@ searchTypeDDL.addEventListener("change", function(event){
 
 })
 
-
 locationsDDL.addEventListener("change", function(event){
 
     searchResults.classList.add("d-none")
@@ -51,6 +50,7 @@ locationsDDL.addEventListener("change", function(event){
 
     let filteredParks = nationalParksArray.filter((nationalPark)=>{
         return nationalPark.State === location
+    
     })
 
     console.log(filteredParks)
@@ -61,6 +61,23 @@ locationsDDL.addEventListener("change", function(event){
     searchResults.classList.remove("d-none")
 
 })
+
+typesDDL.addEventListener("change", function(event){
+
+    searchResults.classList.add("d-none")
+   
+    let type = event.target.value;
+
+    let filteredTypes = nationalParksArray.filter((nationalPark)=>{
+        return nationalPark.LocationName.indexOf(type) >= 0
+    
+    })
+    generateTableRows(filteredTypes)
+    searchResults.classList.remove("d-none")
+
+})
+
+
 
 
 function generateCards(someArrayOfData){
