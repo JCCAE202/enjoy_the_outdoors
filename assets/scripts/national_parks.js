@@ -1,141 +1,139 @@
-//This file has locationsArray, nationalParksArray, and parkTypesArray access
-// We included load_national_parks_data.js above it in the html file
 
-// Everything is going to be event driven based on user input.//
 
-// Get the dropdown list in the JS
+//this file has locationsArray, nationalParksArray, and parkTypesArray available to it because 
+//we included load_national_parks_data.js above it in the html file 
+
+//getting the dropdown list into the JS file for us to work with
 let searchTypeDDL = document.querySelector("#searchTypeDDL");
-let locationsDDL = document.querySelector("#locations");
-let typesDDL = document.querySelector("#types");
-let stateSearchList = document.querySelector("#stateSearchList");
-let typeSearchAttributeList = document.querySelector("#typeSearchAttributeList");
-// Make the table work
-let locationTable = document.querySelector("#locationTable");
-let locationTableBody = document.querySelector("#locationTableBody");
 
-// theSampleButton.addEventListener("click", function(event){
-//     console.log(locationsArray)
-//     console.log(nationalParksArray)
-//     console.log(parkTypesArray)
+//get the locations dropdown so we can work with it
+let locationsDDL = document.querySelector("#stateSearchList");
 
+//get the locations dropdown so we can work with it
+let typesDDL = document.querySelector("#typeSearchAttributeList");
 
+//pulling in the table stuff so i can work with it
+let searchResults = document.querySelector("#searchResult")
+let searchResultsBody = document.querySelector("#searchResult tbody")
 
-searchTypeDDL.addEventListener("change", function (event) {
-    alert("dropdown changed to:" + event.target.value)
+let resultCardsDiv = document.querySelector("#resultsCards")
 
-    // check which search type
-    // if search type is type then show types dropdown
-    // if search type is location then show locations dropdown
+searchTypeDDL.addEventListener("change", function(event){
+
+    //check which search type
+
+    //if search type is location then show locations dropdown
+
+    //if search type is type then show types dropdown
 
     //hide all the dropdowns and then check which is supposed to show below
-   
-    stateSearchList.classList.add("d-none")
+    locationsDDL.classList.add("d-none")
+    typesDDL.classList.add("d-none")
 
-    if (event.target.value === "location") {
+    if(event.target.value === "location"){
         generateLocationsDDLOptions();
-        stateSearchList.classList.remove("d-none")
+        locationsDDL.classList.remove("d-none")
     }
 
-    typeSearchAttributeList.classList.add("d-none")
-
-    if(event.target.value === "types") {
-    generateLocationsDDLOptions();
-    typeSearchAttributeList.classList.remove("d-none")
+    if(event.target.value === "type"){
+        generateTypesDDLOptions()
+        typesDDL.classList.remove("d-none")
     }
 
-
-    // if(event.target.value === "type"){
-    //     generateTypesDDLOptions()
-    //     typesDDL.classList.remove("d-none")
-    //     locationsDDL.classList.add("d-none")
-
-    // }
 })
-stateSearchList.addEventListener("change", function (event) {
-    alert("dropdown changed to:" + event.target.value)
-    let filteredParksArray = nationalParksArray.filter(function (park) {
-        if (park.State === event.target.value) {
-            return true
-        }
-        return false
 
+
+locationsDDL.addEventListener("change", function(event){
+
+    searchResults.classList.add("d-none")
+   
+    let location = event.target.value;
+
+    let filteredParks = nationalParksArray.filter((nationalPark)=>{
+        return nationalPark.State === location
     })
-    console.log(filteredParksArray)
+
+    console.log(filteredParks)
+
+    generateTableRows(filteredParks)
+    // generateCards(filteredParks)
+
+    searchResults.classList.remove("d-none")
+
 })
 
-typeSearchAttributeList.addEventListener("change", function (event) {
-    alert("dropdown changed to:" + event.target.value)
-    let filteredParksArray = nationalParksArray.filter(function (park) {
-        if (park.Type === event.target.value) {
-            return true
-        }
-        return false
 
+function generateCards(someArrayOfData){
+
+    //clear out the tables previous results
+    resultCardsDiv.innerHTML = ""
+
+
+    //generate new table rows and appewnd to the the tbody innerHTML
+    someArrayOfData.forEach((park)=>{
+        let card = '<div class="col">'
+        card += '   <div class="card h-100">'
+        card += '       <img src="..." class="card-img-top" alt="...">'
+        card += '       <div class="card-body">'
+        card += '           <h5 class="card-title">'+ park.LocationName +'</h5>'
+        card += '           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'
+        card += '       <div class="card-body">'
+        card += '           <h5 class="card-title">Card title</h5>'
+        card += '           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'
+        card += '       </div>'
+        card += '   </div>'
+        card += '  </div>'
+        
+
+        resultCardsDiv.innerHTML += card
     })
-    console.log(filteredParksArray)
-})
 
 
-// locationsDDL.addEventListener("change", function(event){
-//     alert(event.target.value)
-// })
+}
 
-function generateLocationsDDLOptions() {
+function generateTableRows(someArrayOfData){
 
-    stateSearchList.innerHTML = `<option value="">Choose A Location</option>`
+    //clear out the tables previous results
+    searchResultsBody.innerHTML = ""
+
+
+    //generate new table rows and appewnd to the the tbody innerHTML
+    someArrayOfData.forEach((park)=>{
+        let row = ""
+        row += `<tr>`
+        row += `    <td>${park.LocationName}</td>`
+        row += `    <td>${park.Address}</td>`
+        row += `    <td>${park.City}</td>`
+        row += `    <td>${park.State}</td>`
+        row += `    <td>${park.Phone}</td>`
+       
+        row += `</tr>`
+
+        searchResultsBody.innerHTML += row
+    })
+
+}
+
+
+
+function generateLocationsDDLOptions(){
+
+    locationsDDL.innerHTML = `<option value="">Choose A Location</option>`
 
     locationsArray.forEach((location) => {
-        stateSearchList.innerHTML += `<option value="${location}">${location}</option>`
+        locationsDDL.innerHTML += `<option value="${location}">${location}</option>`
     })
 
 }
 
-function generateTypesDDLOptions() {
+function generateTypesDDLOptions(){
 
-    parkTypesArray.forEach((parkType) => {
-        typeSearchAttributeList.innerHTML += `<option value="${parkType}">${parkType}</option>`
+    parkTypesArray.forEach((partkType) => {
+        typesDDL.innerHTML += `<option value="${partkType}">${partkType}</option>`
     })
 
 }
 
-function generateLocationTableData(filteredParksArray) {
 
-filteredParksArray.forEach((parkType) => {
-    locationTableBody.innerHTML +=  <tr>
-        <td>${nationalParksArray.LocationName}</td>
-        <td>${nationalParksArray.address}</td>
-        <td>${nationalParksArray.City}</td>
-
-    </tr>
-}
-)
-
-}
-
-
-function generateCards(someArray){
-// empty previous results
-priorCardsDiv.innerHTML = ""
-
-// generate new table rows and append to the tbody innerHTML
-someArray.forEach((park))=>{
-    let card = '<div class="col">'
-    card +='<div class="card">'
-    card +='   <img src="..." class="card-img-top"  alt="...">'
-    card +='   <div class="card-body">'
-    card +='    <h5 class="card-title"> Card Title</h5>'
-    card +='    <p class="card-text"> This is a longer card...>'
-    card +='    <div class="card-body">'
-    card +='    <h5 class="card-title> Card Title</h5'
-    card +='    <p class="card-text"> This is a longer card...>'
-    card +='    </div>'
-    card +='   </div>'
-    card +='    </div>'
-
-    resultCardsDiv.innerHTML += card
-}
-
-
-}
 
 
